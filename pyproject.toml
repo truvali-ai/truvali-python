@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "truvali"
+dynamic = ["version"]
+description = "Official Python SDK for the Truvalı AML and fraud monitoring platform."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Truvali" }]
+keywords = [
+    "truvali",
+    "aml",
+    "anti-money-laundering",
+    "fraud",
+    "fraud-detection",
+    "transaction-monitoring",
+    "sanctions",
+    "compliance",
+    "webhooks",
+    "sdk",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial",
+    "Typing :: Typed",
+]
+dependencies = ["requests>=2.31,<3"]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "twine>=6.1",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "types-requests>=2.31",
+]
+
+[project.urls]
+Homepage = "https://github.com/truvali-ai/truvali-python"
+Source = "https://github.com/truvali-ai/truvali-python"
+Issues = "https://github.com/truvali-ai/truvali-python/issues"
+Changelog = "https://github.com/truvali-ai/truvali-python/blob/main/CHANGELOG.md"
+
+[tool.hatch.version]
+path = "src/truvali/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/truvali"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/LICENSE",
+    "/pyproject.toml",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "D", "SIM", "RUF"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+strict = true
+python_version = "3.10"
+files = ["src", "tests"]
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
